@@ -11,6 +11,7 @@
 
 
 const double gravity = -9.81;
+const double airDensity = 1.225;
 
 
 // EFFECTS: struct for passing parameters to simulator constructor
@@ -43,6 +44,7 @@ private:
 
     SimulationParameters parameters;
     SimulationData stepData;
+    Vector weight;
 
 
     // EFFECTS: computes force due to gravitational acceleration
@@ -51,6 +53,10 @@ private:
 
     // EFFECTS: computes force due to the magnus effect (spin)
     Vector computeMagnus() const;
+
+
+    // EFFECTS: helper to compute the air resistance magnitude
+    double computeAirResistanceMagnitude() const;
 
 
     // EFFECTS: computes force due to air resistance
@@ -79,11 +85,26 @@ public:
         this->weight = Vector(0, this->parameters.projectile.mass * gravity, 0);
         this->stepData.position = this->parameters.initialPosition;
         this->stepData.velocity = this->parameters.initialVelocity;
+
+        auto maxDatapoints = static_cast<unsigned long>(this->parameters.tMax / this->parameters.deltaT);
+        this->results.reserve(maxDatapoints);
     }
 
 
     // EFFECTS: runs the simulation
     void solve();
+
+
+    // EFFECTS: prints the summary to stdout
+    void printResultSummary();
+
+
+    // EFFECTS: prints the saved data to stdout
+    void printResultData() const;
+
+
+    // EFFECTS: saves data to CSV
+    void printCSV() const;
 };
 
 

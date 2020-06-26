@@ -6,13 +6,12 @@
 #define SPHERE_SIM_SPHERE_H
 
 
-class Sphere {
-public:
+struct Sphere {
     double mass;
     double radius;
     double dragCoefficient;
 
-    explicit Sphere(double _mass = 0.20, double _radius = 0.03, double _dragCoefficient = 0.5) :
+    explicit Sphere(double _mass = 0.20 / 1000, double _radius = 3 / 1000, double _dragCoefficient = 0.5) :
             mass(_mass), radius(_radius), dragCoefficient(_dragCoefficient) {}
 };
 

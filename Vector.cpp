@@ -8,6 +8,12 @@
 #include <cmath>
 
 
+// EFFECTS: returns a new vector that is the negative of this vector
+Vector Vector::negate() const {
+    return Vector(-this->x, -this->y, -this->z);
+}
+
+
 // EFFECTS: returns the dot product of two vectors
 double Vector::dot(const Vector &v) const {
     return this->x * v.x + this->y * v.y + this->z * v.z;
@@ -61,8 +67,22 @@ Vector Vector::operator/(double scalar) const {
 
 
 // EFFECTS: override equality
-bool Vector::operator==(const Vector &other) const {
-    return this->x == other.x && this->y == other.y && this->z == other.z;
+bool Vector::operator==(const Vector &rhs) const {
+    return this->x == rhs.x && this->y == rhs.y && this->z == rhs.z;
+}
+
+
+// EFFECTS: element-wise vector addition and assignment
+Vector &Vector::operator+=(const Vector &rhs) {
+    *this = *this + rhs;
+    return *this;
+}
+
+
+// EFFECTS: element-wise vector/scalar addition and assignment
+Vector &Vector::operator+=(double scalar) {
+    *this = *this + scalar;
+    return *this;
 }
 
 

@@ -58,8 +58,17 @@ public:
 
 
     // EFFECTS: override equality
-    bool operator==(const Vector &other) const;
+    bool operator==(const Vector &rhs) const;
+
+
+    // EFFECTS: element-wise vector addition and assignment
+    Vector &operator+=(const Vector &rhs);
+
+
+    // EFFECTS: element-wise vector/scalar addition and assignment
+    Vector &operator+=(double scalar);
 };
+
 
 
 // EFFECTS: element-wise adds two vectors and returns a new vector

@@ -2,3 +2,4 @@ cmake*
 *.out
 .idea
 *Test.cpp
+*.csv
