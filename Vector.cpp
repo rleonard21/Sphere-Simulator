@@ -67,24 +67,24 @@ bool Vector::operator==(const Vector &other) const {
 
 
 // EFFECTS: adds two vectors and returns a new vector
-Vector operator+(Vector lhs, const Vector &rhs) {
+Vector operator+(const Vector &lhs, const Vector &rhs) {
     return Vector(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
 }
 
 
 // EFFECTS: subtracts two vectors and returns a new vector
-Vector operator-(Vector lhs, const Vector &rhs) {
+Vector operator-(const Vector &lhs, const Vector &rhs) {
     return Vector(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
 }
 
 
 // EFFECTS: element-wise multiplies two vectors and returns a new vector
-Vector operator*(Vector lhs, const Vector &rhs) {
+Vector operator*(const Vector &lhs, const Vector &rhs) {
     return Vector(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);
 }
 
 
 // EFFECTS: element-wise divides two vectors and returns a new vector
-Vector operator/(Vector lhs, const Vector &rhs) {
+Vector operator/(const Vector &lhs, const Vector &rhs) {
     return Vector(lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z);
 }

@@ -11,6 +11,7 @@ struct VectorAngle {
     double phi;
 };
 
+
 class Vector {
 public:
     double x;
@@ -62,19 +63,19 @@ public:
 
 
 // EFFECTS: element-wise adds two vectors and returns a new vector
-Vector operator+(Vector lhs, const Vector &rhs);
+Vector operator+(const Vector &lhs, const Vector &rhs);
 
 
 // EFFECTS: element-wise subtracts two vectors and returns a new vector
-Vector operator-(Vector lhs, const Vector &rhs);
+Vector operator-(const Vector &lhs, const Vector &rhs);
 
 
 // EFFECTS: element-wise multiplies two vectors and returns a new vector
-Vector operator*(Vector lhs, const Vector &rhs);
+Vector operator*(const Vector &lhs, const Vector &rhs);
 
 
 // EFFECTS: element-wise divides two vectors and returns a new vector
-Vector operator/(Vector lhs, const Vector &rhs);
+Vector operator/(const Vector &lhs, const Vector &rhs);
 
 
 #endif //SPHERE_SIM_VECTOR_H
