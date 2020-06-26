@@ -32,6 +32,10 @@ Vector Vector::cross(const Vector &v) const {
 
 // EFFECTS: returns the unit vector of this vector
 Vector Vector::unit() const {
+    if(this->length() == 0) {
+        return Vector();
+    }
+
     return *this / this->length();
 }
 

@@ -16,12 +16,15 @@ Vector Simulator::computeWeight() const {
 
 // EFFECTS: computes force due to the magnus effect (spin)
 Vector Simulator::computeMagnus() const {
-    double magnitude = pow(M_PI, 2) * pow(this->parameters.projectile.radius, 3) * airDensity;
+    // https://www.grc.nasa.gov/WWW/K-12/airplane/beach.html
+
+    double magnitude = this->parameters.projectile.liftCoefficient * (4.0 / 3.0) * 4 * pow(M_PI, 2) *
+                       pow(this->parameters.projectile.radius, 3) * airDensity;
+
     Vector relativeVelocity = this->stepData.velocity + this->parameters.initialWind;
 
     Vector f1 = this->parameters.initialAngularVelocity.cross(relativeVelocity);
     return f1 * magnitude;
-
 }
 
 
@@ -47,22 +50,16 @@ Vector Simulator::computeAirResistance() const {
 
 
 // EFFECTS: computes the net force on the projectile
-Vector Simulator::computeNetForce() const {
-    Vector netForce;
-
-    netForce += computeWeight();
-    netForce += computeMagnus();
-    netForce += computeAirResistance();
-
-    return netForce;
+void Simulator::updateNetForce() {
+    this->stepData.netForce = computeWeight();
+    this->stepData.netForce += computeMagnus();
+    this->stepData.netForce += computeAirResistance();
 }
 
 
 // EFFECTS: computes the new velocity for the given time step
 void Simulator::updateVelocity() {
-    Vector netForce = computeNetForce();
-
-    Vector netAcceleration = netForce / this->parameters.projectile.mass; // f = m*a, a = f/m
+    Vector netAcceleration = this->stepData.netForce / this->parameters.projectile.mass; // f = m*a, a = f/m
     Vector velocityStep = netAcceleration * this->parameters.deltaT; // v = a*t
 
     this->stepData.velocity += velocityStep;
@@ -86,6 +83,7 @@ void Simulator::saveStepResults() {
 void Simulator::solve() {
     while (this->stepData.time < this->parameters.tMax &&
            this->stepData.position.y > this->parameters.projectile.radius) {
+        updateNetForce();
         updateVelocity();
         updatePosition();
         saveStepResults();
@@ -96,9 +94,9 @@ void Simulator::solve() {
 
 
 // EFFECTS: prints the summary to stdout
-void Simulator::printResultSummary() {
+void Simulator::printResultSummary() const {
     std::cout << "Travel Time: " << this->stepData.time << "\n";
-    std::cout << "Projectile Range: " << this->stepData.position.x << "\n";
+    std::cout << "Projectile Range: " << this->stepData.position.x * 3.2808399 << " ft\n";
 }
 
 
@@ -106,8 +104,8 @@ void Simulator::printResultSummary() {
 void Simulator::printResultData() const {
     std::cout << "{\n";
 
-    for (auto itr = this->results.begin(); itr != this->results.end(); itr++) {
-        std::cout << "{" << itr->position.x << "," << itr->position.y << "},\n";
+    for (const auto &result : this->results) {
+        std::cout << "{" << result.position.x << "," << result.position.y << "},\n";
     }
 
     std::cout << "}\n";
@@ -115,15 +113,11 @@ void Simulator::printResultData() const {
 
 
 // EFFECTS: saves data to CSV
-void Simulator::printCSV() const {
-    std::ofstream of("results.csv");
+void Simulator::printCSV(const char *filename) const {
+    std::ofstream of(filename);
 
-    assert(of.is_open());
-
-
-
-    for (auto itr = this->results.begin(); itr != this->results.end(); itr++) {
-        of << itr->position.x << "," << itr->position.y << "\n";
+    for (const auto &result : this->results) {
+        of << result.position.x << "," << result.position.y << "\n";
     }
 
     of.close();

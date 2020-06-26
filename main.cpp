@@ -5,21 +5,29 @@
 
 int main() {
     SimulationParameters param = {
-            Sphere(g_to_kg(0.3), mm_to_m(3), 0.5),
-            Vector(fps_to_ms(400), fps_to_ms(100), 0),
+            Sphere(g_to_kg(0.20), mm_to_m(3), 0.5, 0.2),
+            Vector(fps_to_ms(400), 0, 0),
             Vector(0, 1, 0),
             Vector(),
-            Vector(0, 0, 200),
-            0.000001,
-            100
+            Vector(0, 0, 180),
+            0.0001,
+            1000
     };
 
-    Simulator s(param);
+    Simulator s1(param);
+    s1.solve();
+    s1.printCSV("1.csv");
+    s1.printResultSummary();
 
+    param.projectile.mass = g_to_kg(0.3);
+    Simulator s2(param);
+    s2.solve();
+    s2.printCSV("2.csv");
+    s2.printResultSummary();
 
-    for (int i = 0; i < 8; i++) {
-        s.solve();
-        s.printResultSummary();
-    }
-
+    param.projectile.mass = g_to_kg(0.4);
+    Simulator s3(param);
+    s3.solve();
+    s3.printCSV("3.csv");
+    s3.printResultSummary();
 }

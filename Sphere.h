@@ -10,9 +10,11 @@ struct Sphere {
     double mass;
     double radius;
     double dragCoefficient;
+    double liftCoefficient;
 
-    explicit Sphere(double _mass = 0.20 / 1000, double _radius = 3 / 1000, double _dragCoefficient = 0.5) :
-            mass(_mass), radius(_radius), dragCoefficient(_dragCoefficient) {}
+    explicit Sphere(double _mass = 0.20 / 1000, double _radius = 3 / 1000, double _dragCoefficient = 0.5,
+                    double _liftCoefficient = 1) :
+            mass(_mass), radius(_radius), dragCoefficient(_dragCoefficient), liftCoefficient(_liftCoefficient) {}
 };
 
 

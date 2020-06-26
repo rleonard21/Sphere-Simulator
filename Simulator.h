@@ -32,7 +32,7 @@ struct SimulationParameters {
 struct SimulationData {
     Vector position;
     Vector velocity;
-    Vector force;
+    Vector netForce;
 
     double time = 0;
 };
@@ -64,7 +64,7 @@ private:
 
 
     // EFFECTS: computes the net force on the projectile
-    Vector computeNetForce() const;
+    void updateNetForce();
 
 
     // EFFECTS: computes the new velocity for the given time step
@@ -96,7 +96,7 @@ public:
 
 
     // EFFECTS: prints the summary to stdout
-    void printResultSummary();
+    void printResultSummary() const;
 
 
     // EFFECTS: prints the saved data to stdout
@@ -104,7 +104,7 @@ public:
 
 
     // EFFECTS: saves data to CSV
-    void printCSV() const;
+    void printCSV(const char *filename) const;
 };
 
 
