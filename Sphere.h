@@ -7,15 +7,13 @@
 
 
 class Sphere {
-private:
+public:
     double mass;
     double radius;
     double dragCoefficient;
 
-public:
     explicit Sphere(double _mass = 0.20, double _radius = 0.03, double _dragCoefficient = 0.5) :
             mass(_mass), radius(_radius), dragCoefficient(_dragCoefficient) {}
-
 };
 
 

@@ -1,3 +1,4 @@
 cmake*
 *.out
 .idea
+*Test.cpp
