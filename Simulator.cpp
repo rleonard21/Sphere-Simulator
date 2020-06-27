@@ -114,11 +114,18 @@ void Simulator::printResultData() const {
 
 // EFFECTS: saves data to CSV
 void Simulator::printCSV(const char *filename) const {
-    std::ofstream of(filename);
+    std::ofstream of(filename, std::ios_base::app);
 
     for (const auto &result : this->results) {
-        of << result.position.x << "," << result.position.y << "\n";
+        of << result.position.x << ",";
     }
 
+    of << std::endl;
+
+    for (const auto &result : this->results) {
+        of << result.position.y << ",";
+    }
+
+    of << std::endl;
     of.close();
 }

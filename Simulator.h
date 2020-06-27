@@ -105,6 +105,9 @@ public:
 
     // EFFECTS: saves data to CSV
     void printCSV(const char *filename) const;
+
+    // EFFECTS: returns a reference to the simulation data
+    std::vector<SimulationData> &getResults() { return this->results; }
 };
 
 
