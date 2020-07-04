@@ -18,23 +18,23 @@ const double airDensity = 1.225;
 struct SimulationParameters {
     Sphere projectile;
 
+    double deltaT;
+    double tMax;
+
     Vector initialVelocity;
     Vector initialPosition;
     Vector initialWind;
     Vector initialAngularVelocity;
-
-    double deltaT;
-    double tMax;
 };
 
 
 // EFFECTS: struct for saving data from simulation
 struct SimulationData {
+    double time = 0;
+
     Vector position;
     Vector velocity;
     Vector netForce;
-
-    double time = 0;
 };
 
 

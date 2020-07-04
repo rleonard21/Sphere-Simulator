@@ -3,3 +3,4 @@ cmake*
 .idea
 *Test.cpp
 *.csv
+results.dat

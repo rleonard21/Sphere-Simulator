@@ -36,12 +36,12 @@ int main() {
 void setupVaryingWeights(std::vector<Simulator> &s) {
     SimulationParameters param = {
             Sphere(g_to_kg(0.20), mm_to_m(3), 0.5, 0.2),
+            0.0001,
+            1000,
             Vector(fps_to_ms(400), 0, 0),
             Vector(0, 1, 0),
             Vector(),
-            Vector(0, 0, 250),
-            0.0001,
-            1000
+            Vector(0, 0, 250)
     };
 
     for(int i = 0; i < 6; i++) {
@@ -55,15 +55,15 @@ void setupVaryingWeights(std::vector<Simulator> &s) {
 void setupConstantEnergy(std::vector<Simulator> &s) {
     SimulationParameters param = {
             Sphere(g_to_kg(0.20), mm_to_m(3), 0.5, 0.2),
+            0.0001,
+            1000,
             Vector(fps_to_ms(400), 0, 0),
             Vector(0, 1, 0),
             Vector(),
-            Vector(0, 0, 250),
-            0.0001,
-            1000
+            Vector(0, 0, 200)
     };
 
-    const double energy = 1.15; // muzzle energy in joules
+    const double energy = 1.95; // muzzle energy in joules
 
     for(int i = 0; i < 5; i++) {
         param.projectile.mass = g_to_kg(0.2 + 0.05 * i);
