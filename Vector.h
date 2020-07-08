@@ -67,6 +67,12 @@ public:
 
     // EFFECTS: element-wise vector/scalar addition and assignment
     Vector &operator+=(double scalar);
+
+    // EFFECTS: element-wise vector-vector multiplication
+//    Vector &operator*=(const Vector &rhs);
+
+    // EFFECTS: element-wise vector-scalar multiplication
+    Vector &operator*=(double scalar);
 };
 
 

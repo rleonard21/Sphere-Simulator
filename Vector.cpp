@@ -90,6 +90,19 @@ Vector &Vector::operator+=(double scalar) {
 }
 
 
+// EFFECTS: element-wise vector-vector multiplication
+//Vector &operator*=(const Vector &rhs) {
+//    return *this;
+//}
+
+
+// EFFECTS: element-wise vector-scalar multiplication
+Vector &Vector::operator*=(double scalar) {
+    *this = *this * scalar;
+    return *this;
+}
+
+
 // EFFECTS: adds two vectors and returns a new vector
 Vector operator+(const Vector &lhs, const Vector &rhs) {
     return Vector(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
